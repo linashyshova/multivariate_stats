@@ -23,6 +23,7 @@ def MVT_MLE_approach2(X):
     Hinv = np.linalg.pinv(H)
     V_asy = n * Hinv  # asymptotic variance
     V_sam = Hinv  # sample variance
+
     # translate theta_tilde to theta (g (.) ) and apply delta   method
     Theta = g_fun_mvt(Theta_tilde, p).reshape(-1, 1)
     Jfun = nd.Jacobian(g_fun_mvt)
