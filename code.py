@@ -328,17 +328,18 @@ def main():
     names = ["AAPL", "MSFT", "AMZN", "GOOG", "TSLA"]
     out = report_mvt_results(theta, VCV_sam, df, names=names)
 
+    print("########### PART C ###################")
     # Removes column with dates
     clean_data = data[["AAPL", "MSFT", "AMZN", "GOOG", "TSLA"]]
     X = clean_data.to_numpy()
 
     # MLE of the data
     Theta, VCV_sam, VCV_asy, converged = MVT_MLE_approach2(X)
+    print(f"Theta {Theta}")
 
-    print("########### PART C ###################")
     A_2 = np.array([0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
     b = 2
-
+    n = len(data['AMZN'])
     test_stat_2 = (A_2 @ VCV_asy @ A_2.T) ** (-0.5) * np.sqrt(n) * (A_2 @ Theta - b)
     crit_val = norm.ppf(0.975)
     print("Test statistic c", test_stat_2)
